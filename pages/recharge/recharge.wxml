@@ -1,0 +1,111 @@
+<!--充值中心  -->
+<view class='recharge'>
+  <!--头部  -->
+  <view class='recharge-head flex-around'>
+    <view bindtap='showEB'>
+      <text class="{{checkedEB?'is-checked':'normal'}}">EB充值</text>
+    </view>
+    <view bindtap='showMsg'>
+      <text class="{{checkedMsg?'is-checked':'normal'}}">短信充值</text>
+    </view>
+  </view>
+  <!--main EB  -->
+  <view hidden='{{showMain}}' class='recharge-mian'>
+    <view class='clearfix head-title'>
+      <view class='fl img-box flex-between'>
+        <image src='{{img}}'></image>
+      </view>
+
+      <view class='fl head-con flex-between'>
+        <view class='nice-name'>{{niceName}}</view>
+        <view>
+          <text style='color: #fdab1d;'>{{beAmount}}EB</text>
+        </view>
+      </view>
+
+    </view>
+    <view class='chooseCount'>
+      <view class='choose-tit flex-around'>
+        <text>请选择EB个数</text>
+      </view>
+      <view class='flex-around counts-box'>
+        <text bindtap='chooseCountE' data-index="{{index}}" wx:for='{{arrEb}}' class="{{index===chooseIndexE?'active':''}}">{{item.goodsAlias}}</text>
+
+      </view>
+    </view>
+    <view class='sum-money'>
+      <image src='../../image/money.png'></image>
+      <text class='money'>{{constEX}}</text>
+      <text class='unit'>元</text>
+      <view class='yuanjia'>
+        <text class='money-y'>{{constEY}}</text>
+        <text class='money-y'>元</text>
+        <view class='delete-money'></view>
+      </view>
+    </view>
+    <view class='pay-mode flex-around'>请选择付款方式</view>
+
+    <view class='wechat-pay flex-between'>
+      <view class='wechat-pay-left flex-between'>
+        <image src='../../image/wechat.png'></image>
+        <text>微信支付</text>
+      </view>
+
+      <view class='wechat-pay-right'>
+        <image src='../../image/choose.png'></image>
+      </view>
+
+      <view class='btn' bindtap='wechatPayEB'>立即购买</view>
+    </view>
+
+  </view>
+  <!--main 短信  -->
+  <view hidden='{{!showMain}}'>
+    <view class='clearfix head-title'>
+      <view class='fl img-box flex-between'>
+        <image src='{{img}}'></image>
+      </view>
+
+      <view class='fl head-con flex-between'>
+        <view class='nice-name'>{{niceName}}</view>
+        <view>
+          <text style='color: #fdab1d;'>{{smsAmount}}条</text>
+        </view>
+      </view>
+    </view>
+
+    <view class='chooseCount'>
+      <view class='choose-tit flex-around'>
+        <text>请选择短信套餐</text>
+      </view>
+      <view class='flex-around counts-box'>
+        <text bindtap='chooseCountMsg' data-index='{{index}}' wx:for='{{arrMsg}}' class="{{index===chooseIndexMsg?'active':''}}">{{item.goodsAlias}}</text>
+      </view>
+    </view>
+
+    <view class='sum-money'>
+      <image src='../../image/money.png'></image>
+      <text class='money'>{{constMX}}</text>
+      <text class='unit'>元</text>
+      <view class='yuanjia'>
+        <text class='money-y'>{{constMY}}</text>
+        <text class='money-y'>元</text>
+        <view class='delete-money'></view>
+      </view>
+    </view>
+    <view class='pay-mode flex-around'>请选择付款方式</view>
+
+    <view class='wechat-pay flex-between'>
+      <view class='wechat-pay-left flex-between'>
+        <image src='../../image/wechat.png'></image>
+        <text>微信支付</text>
+      </view>
+
+      <view class='wechat-pay-right'>
+        <image src='../../image/choose.png'></image>
+      </view>
+
+      <view class='btn' bindtap='wechatPayMsg'>立即购买</view>
+    </view>
+  </view>
+</view>

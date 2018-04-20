@@ -1,0 +1,44 @@
+/* pages/myorder/myorder.wxss */
+@import "../template/order/order.wxss" ;
+
+page{
+  height: 100%;
+}
+/*没有记录  */
+ .recode-box{
+  height: 100%;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   background: #f5f5f5;
+}
+.recode-box image{
+  width: 120rpx;
+  height: 120rpx;
+}
+.text1{
+  font-size: 30rpx;
+  color: #999;
+}
+.text2{
+  font-size: 26rpx;
+  color: #bbb;
+} 
+.mian{
+  height: calc(100% - 110rpx);
+}
+.header{
+  height: 110rpx;
+  border-top: 2rpx solid #e2e2e2;
+}
+.header text{
+  font-size: 30rpx;
+  color: #999;
+  padding-bottom:16rpx;
+}
+.header text.active{
+  color: #4e8cee;
+  border-bottom: 6rpx solid #4e8cee;
+  border-radius: 5rpx;
+}

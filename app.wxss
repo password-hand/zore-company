@@ -1,0 +1,61 @@
+/**app.wxss**/ 
+.fl{
+  float: left;
+}
+.fr{
+  float: right;
+}
+.clearfix:after{
+  content: '';
+  display: block;
+  visibility: hidden;
+  height: 0;
+  clear:both;
+}
+
+text,view{
+  font-family: 'Arial', 'Microsoft YaHei';
+}
+
+.flex-around {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+view{
+  box-sizing: border-box;
+}
+.btn {
+  width: 90%;
+  height: 90rpx;
+  background: rgb(78, 140, 238);
+  color: white;
+  border-radius: 50rpx;
+  text-align: center;
+  line-height: 90rpx;
+  position: fixed;
+  bottom: 40rpx;
+  left: 5%;
+}
+
+ .yue {
+  background: #f1b054;
+}
+
+ .ji {
+  background: #fe721e;
+}
+
+ .success {
+  background: #56ba88;
+}
+
+ .default {
+  background: #ff5c55;
+}

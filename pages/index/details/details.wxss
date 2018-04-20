@@ -1,0 +1,25 @@
+/* pages/index/details/details.wxss */
+
+
+.declare-tit{
+  border-top: 20rpx solid #f5f5f5;
+  border-bottom: 2rpx solid #f5f5f5;
+  padding: 0 34rpx;
+  height: 100rpx;
+  width: 100%;
+  text-align: left;
+  line-height: 100rpx;
+}
+.declare-tit>text{
+  font-size: 32rpx;
+  color: #333;
+  font-weight: bold;
+}
+.declare-msg{
+  padding: 0 34rpx;
+}
+.declare-msg view{
+  margin-top: 36rpx;
+  font-size: 30rpx;
+  color: #999;
+}

@@ -1,0 +1,62 @@
+page {
+  background: #f5f5f5;
+}
+/*没有申报记录  */
+.recode-box{
+  height: 100%;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   margin-top:50%;  
+}
+.recode-box image{
+  width: 120rpx;
+  height: 120rpx;
+}
+.text1{
+  font-size: 30rpx;
+  color: #999;
+}
+.text2{
+  font-size: 26rpx;
+  color: #bbb;
+}
+.addContent {
+  padding-bottom: 170rpx;
+}
+.btncom{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 160rpx;
+  background: #f5f5f5;
+}
+.add-list {
+  margin: 30rpx 20rpx;
+  padding: 20rpx 30rpx 20rpx 20rpx;
+  background: white;
+  height: 216rpx;
+  border-radius: 6rpx;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.add-list-tit {
+  width: 100%;
+}
+.add-list-tit>text {
+  font-size: 30rpx;
+  color: #333;
+}
+.add-list-tit>image {
+  width: 38rpx;
+  height: 38rpx;
+  text-align: right;
+}
+.add-list-msg {
+  font-size: 28rpx;
+  color: #999;
+}

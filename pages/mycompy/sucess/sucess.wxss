@@ -1,0 +1,41 @@
+ /* pages/mycompy/sucess/sucess.wxss 
+page{
+  background: #f5f5f5;
+}
+.success-icon{
+  flex-direction: column;
+  margin-top: 95rpx;
+}
+.success-icon image{
+  width: 140rpx;
+  height: 140rpx;
+}
+.success-icon view{
+  font-size: 36rpx;
+  color: #333;
+  margin-top: 52rpx;
+}
+
+.success-con{
+  height: 200rpx;
+  background: white;
+  padding: 0 34rpx;
+  margin-top: 105rpx;
+}
+.success-con .txt{
+  align-items: flex-end
+}
+.success-con .tit,.success-con .txt{
+  flex-direction: column;
+}
+.success-con .tit>view{
+  font-size: 30rpx;
+  color: #666; 
+}
+.success-con .txt>view{
+  font-size: 30rpx;
+  color: #333; 
+} */
+
+@import "../../template/declare/declare.wxss"
+

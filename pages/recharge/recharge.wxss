@@ -1,0 +1,191 @@
+counts-boxcounts-boxpage{
+  background: #f5f5f5;
+}
+.recharge{
+  background: white;
+}
+.recharge-head {
+  height: 110rpx;
+  border-top: 2rpx solid #e2e2e2;
+}
+
+.recharge-head >view>text {
+  padding-bottom: 18rpx;
+  font-size: 30rpx;
+}
+
+.recharge-head >view>text.is-checked {
+  color: #4e8cee;
+  border-bottom: 6rpx solid #4e8cee;
+}
+
+.recharge-head >view>text.normal {
+  color: #999;
+}
+
+.head-title {
+  height: 160rpx;
+  border-top: 20rpx solid #f5f5f5;
+  flex-direction: column;
+  padding-top: 20rpx;
+}
+
+.img-box {
+  padding: 4rpx;
+  border: 4rpx solid #fff;
+  border-radius: 50%;
+  margin-left: 28rpx;
+  margin-right: 30rpx;
+}
+
+.img-box image {
+  border-radius: 50%;
+  width: 100rpx;
+  height: 100rpx;
+}
+
+.head-con {
+  margin-top: 20rpx;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.head-con view text {
+  font-size: 28rpx;
+}
+
+.nice-name {
+  font-size: 30rpx;
+  color: #333;
+}
+
+.chooseCount {
+  border-top: 2rpx solid #f5f5f5;
+  border-bottom: 2rpx solid #f5f5f5;
+}
+
+.choose-tit {
+  justify-content: flex-start;
+  padding: 20rpx 0;
+}
+
+.choose-tit>text {
+  font-size: 26rpx;
+  color: #999;
+  margin-left: 24rpx;
+}
+
+.counts-box {
+  padding: 0 3%;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  width: 95%;
+  margin: 0 auto;
+}
+
+.counts-box>text {
+  font-size: 30rpx;
+  border: 2rpx solid #999;
+  width: 120rpx;
+  height: 60rpx;
+  text-align: center;
+  line-height: 60rpx;
+  border-radius: 5rpx;
+  margin: 18rpx;
+}
+modal input{
+  margin: 0 auto;
+  text-align: center;
+  color: #333;
+}
+.choose-mouth {
+  padding: 0 3%;
+  height: 130rpx;
+}
+
+.choose-mouth text {
+  font-size: 26rpx;
+  width: 130rpx;
+  height: 60rpx;
+  text-align: center;
+  line-height: 60rpx;
+  border-radius: 5rpx;
+  border: 2rpx solid #999;
+}
+
+.sum-money {
+  height: 100rpx;
+  border-top: 2rpx solid #f5f5f5;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 32rpx;
+}
+
+.sum-money image {
+  width: 30rpx;
+  height: 36rpx;
+}
+
+.money {
+  padding: 0 20rpx;
+  color: #4e8cee;
+  font-size: 36rpx;
+  margin-top: 5rpx;
+}
+.yuanjia{
+  margin-top: 9rpx;
+  margin-left: 20rpx;
+  /* position: relative; */
+}
+.money-y{
+  color: #666;
+  font-size: 28rpx;
+}
+.delete-money{
+  border-top:2rpx solid red;
+  /* position: absolute;
+  top: 22rpx;
+  left: -4rpx; */
+  transform: rotateZ(20deg) translate(-10rpx,-15rpx);
+  width: 72rpx;
+}
+
+.unit {
+  color: #666;
+  font-size: 26rpx;
+}
+
+.pay-mode {
+  height: 70rpx;
+  background: #f5f5f5;
+  color: #999;
+  font-size: 26rpx;
+  padding-left: 32rpx;
+  justify-content: flex-start;
+}
+
+.wechat-pay {
+  height: 110rpx;
+  padding: 0 32rpx;
+}
+
+.wechat-pay-left image {
+  width: 50rpx;
+  height: 50rpx;
+  margin-right: 22rpx;
+}
+
+.wechat-pay-left text {
+  color: #666;
+  font-size: 30rpx;
+}
+
+.wechat-pay-right image {
+  width: 40rpx;
+  height: 40rpx;
+}
+ .counts-box>text.active,.choose-mouth>text.active{
+  color:#fdab1d; 
+  border-color: #fdab1d;
+}

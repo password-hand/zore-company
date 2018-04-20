@@ -1,0 +1,103 @@
+<!--确认添加页面  -->
+<view>
+  <!--头部  -->
+  <view class='my-company-tit flex-between'>
+    <view class='flex-between start'>
+      <view class='shibei'>
+        <text>纳税人</text>
+        <text>识别号</text>
+      </view>
+      <input placeholder='请输入纳税人识别号' placeholder-class='placeholder' bindinput='dispalyNum'></input>
+    </view>
+    <!--改变黑√ 为按钮查询  -->
+    <view class='image-icons'>
+      <!-- <image hidden='{{selectImg}}' bindtap='checkedId' class='image-icon' src='../../../image/no-choose.png'></image> -->
+      
+      <view hidden='{{selectImg}}' bindtap='checkedId' class='query'>查询</view>
+      <image hidden='{{!selectImg}}' class='image-icon' src='../../../image/choose.png'></image>
+    </view>
+  </view>
+  <!--中部  -->
+  <view class='my-company-body'>
+    <view class='flex-between part'>
+      <view class='flex-between start'>
+        <text>企业名称</text>
+        <view class='show-style'>{{name}}</view>
+      </view>
+      <view class='image-icons'>
+      </view>
+    </view>
+
+    <view class='flex-between part'>
+      <view class='flex-between start'>
+        <text>地址</text>
+        <view class='show-style'>{{address}}</view>
+      </view>
+
+      <view class='image-icons'></view>
+    </view>
+
+    <view class='flex-between part'>
+      <view class='flex-between start'>
+        <text>联系人</text>
+        <picker class='picker' mode="selector" range="{{arrcontact}}" value="{{index1}}" bindchange="listenerPickerCon" bindtap='getContact'>
+          <text>{{arrcontact[index1]}}</text>
+        </picker>
+      </view>
+      <view class='image-icons image-sty'>
+        <image class='img-size' src='../../../image/down.png'></image>
+      </view>
+    </view>
+
+    <view class='flex-between part'>
+      <view class='flex-between start'>
+        <text>联系电话</text>
+        <view class='show-style'>{{telNum}}</view>
+      </view>
+      <!-- <input type='number' bindinput='getTelnum' value='{{meg.telNum}}'></input> -->
+      <view class='image-icons'>
+      </view>
+    </view>
+
+    <!-- <view class='flex-between part'>
+      <view class='flex-between start'>
+        <text>纳税人类型</text>
+        <input bindinput='getType' value='{{meg.staType}}'></input>
+      </view>
+      <view class='image-icons'>
+      </view>
+    </view> -->
+
+    <view class='flex-between part'>
+      <view class='flex-between start'>
+        <text>申报类型</text>
+        <picker class='picker' mode="selector" range="{{arrtaxes}}" value="{{index2}}" bindchange="listenerPickerTaxes">
+          <text>{{arrtaxes[index2]}}</text>
+        </picker>
+      </view>
+      <view class='image-icons image-sty'>
+        <image class='img-size' src='../../../image/down.png'></image>
+      </view>
+    </view>
+  </view>
+  <!--下部  -->
+  <view class='my-company-foot my-company-body'>
+    <view class='flex-between part'>
+      <view class='flex-between start'>
+        <text>图形验证</text>
+        <input placeholder='请输入图形验证码' placeholder-class='placeholder' bindinput='checkedImg'></input>
+      </view>
+      <view class='pic-ver ver' bindtap='changeImg'>{{letter}}</view>
+    </view>
+
+    <view class='flex-between part'>
+      <view class='flex-between start'>
+        <text>验证码</text>
+        <input placeholder='请输入手机验证码' placeholder-class='placeholder' bindinput='checkedTel'></input>
+      </view>
+      <view class='phone-ver ver' bindtap='sondMsg'>发送验证码</view>
+    </view>
+  </view>
+  <!--底部  -->
+  <view class='btn' bindtap='confirmAdd'>确认添加</view>
+</view>

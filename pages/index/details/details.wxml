@@ -1,0 +1,44 @@
+<!--pages/index/details/details.wxml-->
+<view wx:for='{{detailArr}}'>
+  <view class='declare-tit'>
+    <text>{{item.enterprise_name}}</text>
+  </view>
+  <view class='declare-msg'>
+    <view>
+      <text>诚信代码: </text>
+      <text>{{item.shxydm}} </text>
+    </view>
+    <view>
+      <text>申报方式: </text>
+      <text>{{item.declare_way}} </text>
+    </view>
+    <view>
+      <text>所属期起: </text>
+      <text>{{item.skssqq}} </text>
+    </view>
+    <view>
+      <text>所属期至: </text>
+      <text>{{item.skssqz}} </text>
+    </view>
+    <view>
+      <text>申报状态: </text>
+      <text>{{item.declare_state}} </text>
+    </view>
+    <view>
+      <text>提交时间: </text>
+      <text>{{item.submit_time}} </text>
+    </view>
+    <view>
+      <text>反馈时间: </text>
+      <text>{{item.feedback_time}} </text>
+    </view>
+    <view>
+      <text>申报结果: </text>
+      <text>{{item.declare_result}} </text>
+    </view>
+    <view>
+      <text>失败原因: </text>
+      <text>{{item.failure_reason}} </text>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,43 @@
+<!--我的企业 -->
+<view class='addContent'>
+  <!--没有企业显示  -->
+  <view wx:if='{{noCompany}}' class='recode-box'>
+    <view>
+      <image src='../../image/no-company.png'></image>
+    </view>
+    <view style='margin-top:10rpx;'>
+      <text class='text1'>还没有企业</text>
+    </view>
+    <view>
+      <text class='text2'>您还没有企业，快去添加吧</text>
+    </view>
+  </view>
+
+  <!--添加后显示  -->
+  <view wx:else>
+    <view class='add-list' wx:for='{{addCompany}}'>
+      <view class='add-list-tit flex-between'>
+        <text>{{item.nsrmc}}</text>
+        <image data-id='{{index}}' bindtap='deleteMsg' src='../../image/delete.png'></image>
+      </view>
+      <view class='add-list-msg'>
+        <text>诚信代码: </text>
+        <text>{{item.nsrsbh}}</text>
+      </view>
+      <view class='add-list-msg'>
+        <text>申报方式: </text>
+        <text>{{item.declareTypeName}}</text>
+      </view>
+      <view class='add-list-msg'>
+        <text>纳税人类型: </text>
+        <text>{{item.nsrlxmc}}</text>
+      </view>
+    </view>
+  </view>
+</view>
+<!--底部  -->
+<view class='btncom'>
+  <view class='btn' bindtap='addCompanyP'>添加企业</view>
+</view>
+
+ 

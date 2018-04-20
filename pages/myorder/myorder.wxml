@@ -1,0 +1,171 @@
+<!--pages/myorder/myorder.wxml-->
+<!--order  -->
+<view class='header flex-around'>
+  <view wx:for="{{arrHead}}">
+    <text bindtap='showCon' data-id="{{index}}" class="{{index===chooseCon?'active':''}}">{{item}}</text>
+  </view>
+</view>
+<!--全部  -->
+<view class='mian' hidden='{{show0}}' data-id='{{mun0}}'>
+  <!--空状态  -->
+  <view class='recode-box' hidden='{{!showOder0}}'>
+    <view>
+      <image src='../../image/no-order.png'></image>
+    </view>
+    <view style='margin-top:10rpx;'>
+      <text class='text1'>还没有记录</text>
+    </view>
+    <view>
+      <text class='text2'>您还没有申报，快去申报吧</text>
+    </view>
+  </view>
+  <!--循环数据  -->
+  <view class='order-list' hidden='{{showOder0}}' wx:for="{{allOrder}}">
+    <view class='flex-between order-tit'>
+      <text>{{item.goodsName}}</text>
+      <text style='font-size: 24rpx;color: #999;'>{{item.payState}}</text>
+    </view>
+    <view class='order-mian'>
+      <view>
+        <text>数量: </text>
+        <text>{{item.goodsAmount}}</text>
+      </view>
+      <view>
+        <text>价格: </text>
+        <text>{{item.orderMoney}}</text>
+      </view>
+      <view>
+        <text>时间: </text>
+        <text>{{item.createTime}}</text>
+      </view>
+    </view>
+    <view class='flex-around oder-btn'>
+      <text style='margin-right:26rpx;' data-index='{{index}}' bindtap='deleteAllOrder'>删除</text>
+      <text class='pay-money'>再次购买</text>
+    </view>
+  </view>
+</view>
+
+<!--已完成  -->
+<view class='mian' hidden='{{show1}}' data-id='{{mun1}}' data-index='{{ind}}' >
+  <!--空状态  -->
+  <view class='recode-box' hidden='{{!showOder1}}'>
+    <view>
+      <image src='../../image/no-order.png'></image>
+    </view>
+    <view style='margin-top:10rpx;'>
+      <text class='text1'>还没有记录</text>
+    </view>
+    <view>
+      <text class='text2'>您还没有申报，快去申报吧</text>
+    </view>
+  </view>
+  <!--循环数据  -->
+  <view class='order-list' hidden='{{showOder1}}' wx:for="{{complete}}">
+    <view class='flex-between order-tit'>
+      <text>{{item.goodsName}}</text>
+      <text style='font-size: 24rpx;color: #999;'>{{item.payState}}</text>
+    </view>
+    <view class='order-mian'>
+      <view>
+        <text>数量: </text>
+        <text>{{item.goodsAmount}}</text>
+      </view>
+      <view>
+        <text>价格: </text>
+        <text>{{item.orderMoney}}</text>
+      </view>
+      <view>
+        <text>时间: </text>
+        <text>{{item.createTime}}</text>
+      </view>
+    </view>
+    <view class='flex-around oder-btn'>
+      <text style='margin-right:26rpx;' data-index='{{index}}' bindtap='deleteComOrder'>删除</text>
+      <text class='pay-money'>再次购买</text>
+    </view>
+  </view>
+</view>
+
+<!--待付款  -->
+<view class='mian' hidden='{{show2}}' data-id='{{mun2}}' >
+  <!--循环数据  -->
+  <view class='order-list' hidden='{{showOder2}}' wx:for="{{waitpay}}">
+    <view class='flex-between order-tit'>
+      <text>{{item.goodsName}}</text>
+      <text style='font-size: 24rpx;color: #999;'>{{item.payState}}</text>
+    </view>
+    <view class='order-mian'>
+      <view>
+        <text>数量: </text>
+        <text>{{item.goodsAmount}}</text>
+      </view>
+      <view>
+        <text>价格: </text>
+        <text>{{item.orderMoney}}</text>
+      </view>
+      <view>
+        <text>时间: </text>
+        <text>{{item.createTime}}</text>
+      </view>
+    </view>
+    <view class='flex-around oder-btn'>
+      <text style='margin-right:26rpx;' data-index='{{index}}'  bindtap='deleteWaitOrder'>删除</text>
+      <text class='pay-money'>再次购买</text>
+    </view>
+  </view>
+  <!--空状态  -->
+  <view class='recode-box' hidden='{{!showOder2}}' >
+    <view>
+      <image src='../../image/no-order.png'></image>
+    </view>
+    <view style='margin-top:10rpx;'>
+      <text class='text1'>还没有记录</text>
+    </view>
+    <view>
+      <text class='text2'>您还没有申报，快去申报吧</text>
+    </view>
+  </view>
+</view>
+
+<!--已取消  -->
+<view class='mian' hidden='{{show3}}' data-id='{{mun3}}'>
+  <!--空状态  -->
+  <view class='recode-box' hidden='{{!showOder3}}'>
+    <view>
+      <image src='../../image/no-order.png'></image>
+    </view>
+    <view style='margin-top:10rpx;'>
+      <text class='text1'>还没有记录</text>
+    </view>
+    <view>
+      <text class='text2'>您还没有申报，快去申报吧</text>
+    </view>
+  </view>
+
+  <!--循环数据  -->
+  <view class='order-list' hidden='{{showOder3}}'  wx:for="{{cancel}}">
+    <view class='flex-between order-tit'>
+      <text>{{item.goodsName}}</text>
+      <text style='font-size: 24rpx;color: #999;'>{{item.payState}}</text>
+    </view>
+    <view class='order-mian'>
+      <view>
+        <text>数量: </text>
+        <text>{{item.goodsAmount}}</text>
+      </view>
+      <view>
+        <text>价格: </text>
+        <text>{{item.orderMoney}}</text>
+      </view>
+      <view>
+        <text>时间: </text>
+        <text>{{item.createTime}}</text>
+      </view>
+    </view>
+    <view class='flex-around oder-btn'>
+      <text style='margin-right:26rpx;' data-index='{{index}}' bindtap='deleteCancelOrder'>删除</text>
+      <text class='pay-money'>再次购买</text>
+    </view>
+  </view>
+</view>

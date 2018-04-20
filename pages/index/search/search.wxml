@@ -1,0 +1,30 @@
+<!--pages/index/search/search.wxml-->
+  <view wx:if='{{nothing}}'>
+  <view class='recode-box' >
+    <view>
+      <image src='../../../image/no-result.png'></image>
+    </view>
+    <view style='margin-top:10rpx;'>
+      <text class='text1'>查不到结果{{datatime}}</text>
+    </view>
+    <view>
+      <text class='text2'>您还没有申报，快去申报吧~</text>
+    </view>
+  </view>
+</view> 
+  
+
+<!--有数据的时候  -->
+<view class='apply'>
+<!-- 循环生成 -->
+  <view class='apply-list flex-between' wx:for='{{recordArr}}' data-index='{{index}}' bindtap='declareList'>
+    <view>
+      <view class='apply-list-left'>{{item.enterprise_name}}</view>
+      <view class='btn-box flex-between'>
+         <view class="{{item.changeYJ?'yue':'ji'}}">{{item.declare_way}}</view>
+         <view class="{{item.changeSF?'success':'default'}}">{{item.declare_result}}</view>
+      </view>
+    </view>
+    <view class='apply-list-right'>{{item.create_time}}</view>
+  </view>
+</view>

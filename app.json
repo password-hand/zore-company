@@ -1,0 +1,28 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/mycompy/mycompy",
+    "pages/declare/declare",
+    "pages/myorder/myorder",
+    "pages/recharge/recharge",
+    "pages/template/declare/declare",
+    "pages/declare/declarelist/declarelist",
+    "pages/index/commontaxes/commontaxes",
+    "pages/template/order/order",
+    "pages/index/search/search",
+    "pages/mycompy/sucess/sucess",
+    "pages/index/smalltaxes/smalltaxes",
+    "pages/mycompy/addcompany/addcompany",
+    "pages/index/smalltaxes/successfail/successfail",
+    "pages/index/commontaxes/sucfail/sucfail",
+    "pages/index/details/details",
+    "pages/index/search/searchdeta/searchdeta",
+    "pages/template/taxesf/taxesf"
+  ],
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "零申报",
+    "navigationBarTextStyle": "black"
+  }
+}

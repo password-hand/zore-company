@@ -1,0 +1,29 @@
+
+<view class='success-icon flex-around'>
+  <image src='../../../../image/success.png'></image>
+  <view class='submit-comfilm'>提交成功</view>
+  <view class=' flex-around success-content'>
+    <view>
+      可在首页查看历史记录
+    </view>
+    <view>
+      或进行结果查询查看具体详情
+    </view>
+  </view>
+
+</view>
+
+<view class='flex-between success-con'>
+  <view class='tit flex-around'>
+    <view>企业</view>
+    <view style='padding:20rpx 0'>月报</view>
+    <view>季报</view>
+  </view>
+  <view class='txt flex-around'>
+    <view>共 {{company}} 家</view>
+    <view style='padding:20rpx 0'>共 {{yuebao}} 家</view>
+    <view>共 {{jibao}} 家</view>
+  </view>
+</view>
+
+<view class='btn' bindtap='backToList'>确定</view>

@@ -1,0 +1,30 @@
+<!--pages/template/template.wxml-->
+<template name="order">
+  <view class='mian' >
+  <!--循环数据  -->
+    <view class='order-list'>
+      <view class='flex-between order-tit'>
+        <text>EB购买</text>
+        <text style='font-size: 24rpx;color: #999;'>已完成</text>
+      </view>
+      <view class='order-mian'>
+        <view>
+          <text>数量: </text>
+          <text>10</text>
+        </view>
+        <view>
+          <text>价格: </text>
+          <text>500元</text>
+        </view>
+        <view>
+          <text>时间: </text>
+          <text>2018-3-3 14:00</text>
+        </view>
+      </view>
+      <view class='flex-around oder-btn'>
+        <text style='margin-right:26rpx;'>删除</text>
+        <text class='pay-money'>再次购买</text>
+      </view>
+    </view>
+  </view>
+</template>

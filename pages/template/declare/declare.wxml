@@ -1,0 +1,24 @@
+<!--pages/template/declare/declare.wxml-->
+ 
+<template name='success'>
+<view class='success-icon flex-around'>
+  <image src='../../../image/success.png'></image>
+  <view>添加成功</view>
+</view>
+
+<view class='flex-between success-con'>
+  <view class='tit flex-around'>
+    <view>企业</view>
+    <view style='padding:20rpx 0'>税号</view>
+    <view>类型</view>
+  </view>
+  <view class='txt flex-around'>
+    <view>{{company}}</view>
+    <view style='padding:20rpx 0'>{{code}}</view>
+    <view>{{staType}}</view>
+  </view>
+</view>
+
+<view class='btn' bindtap='backToList'>确定</view>
+ 
+</template>
