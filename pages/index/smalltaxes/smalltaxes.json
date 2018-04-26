@@ -1,1 +1,5 @@
-{"navigationBarTitleText": "小规模纳税人"}
+{
+  "navigationBarTitleText": "小规模纳税人",
+  "enablePullDownRefresh": true,
+  "onReachBottomDistance": 50
+}

@@ -46,7 +46,8 @@ page {
 }
 
 input {
-  margin-bottom: 10rpx;
+   margin-bottom: 10rpx; 
+  
 }
 
 .inp-box image {
@@ -248,7 +249,7 @@ input {
 
 /*弹出框  */
 
-.lary {
+.mask {
   position: fixed;
   left: 0;
   top: 0;

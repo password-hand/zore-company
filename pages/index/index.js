@@ -1,12 +1,10 @@
-//index.js
-//获取应用实例
 const app = getApp()
 var util = require('../../utils/util.js');
 var openapi = require('../../utils/openapi.js');
 
 Page({
   data: {
-    skip: true,
+    skip: false,
     index0: 100,
     index1: 0,
     index2: 0,
@@ -33,7 +31,7 @@ Page({
     //选中状态
     checkedHome: true,
     checkedMe: false,
-    date: '',
+   // date: '',
     //弹框状态
     showPop: true,
     year: '',
@@ -43,8 +41,8 @@ Page({
     changeYJ: '',
     changeSF: '',
     declare_id: '',
-    srollHeight: '',
-    page:2
+    //srollHeight: '',
+    page: 2
   },
   onLoad: function () {
 
@@ -58,11 +56,6 @@ Page({
     var arrayDays = this.data.arrayDay
     var that = this
     var ping
-    // if (wx.getSystemInfoSync().windowWidth > 380) {
-    //   ping = 440
-    // } else {
-    //   ping = 370
-    // }
     that.setData({
       //设置本地时间为默认时间
       year: arrTime[0],
@@ -70,9 +63,7 @@ Page({
       day: arrTime[2],
       index1: mouth - 1,
       index2: day - 1,
-      //srollHeight: (wx.getSystemInfoSync().windowHeight - ping) * 2
     })
-    // console.log(this.data.srollHeight)
     wx.getUserInfo({
       success: (res) => {
         that.setData({
@@ -133,6 +124,11 @@ Page({
       arr.push(...res.data.data)
       for (let j = 0; j < arr.length; j++) {
         arr[j].create_time = arr[j].create_time.split(' ')[0]
+        //时间格式化
+        // ********************************************************/
+        //arr[j].create_time = util.formatDate(arr[j].create_time)
+        // ********************************************************/
+
         arr[j].changeYJ = ''
         arr[j].changeSF = ''
         if (arr[j].declare_way == '00') {
@@ -198,10 +194,18 @@ Page({
     //   }
     // })
   },
+
+  //正则手机验证
+  focusP: function (e) {
+    var RegExp = /^1(3|4|5|7|8)\d{9}$/;
+    if (!RegExp.test(e.detail.value)) {
+      openapi.showTost('请输入正确的格式！', 1500)
+    }
+  },
   //授权页跳过
   skipPage: function () {
     this.setData({
-      skip: false
+      skip: true
     })
   },
   showHome: function () {
@@ -222,6 +226,12 @@ Page({
       checkedHome: false,
       checkedMe: true,
       searchSta: true
+    })
+  },
+  //点击弹出层消失
+  dispear: function () {
+    this.setData({
+      showPop: true
     })
   },
   //当月申报记录详情

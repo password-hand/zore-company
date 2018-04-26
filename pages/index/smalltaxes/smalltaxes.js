@@ -7,6 +7,7 @@ Page({
   data: {
     mun: 0,
     stage: '',
+    page:2,
     changes: true,
     ind: '',
     arrMsg: [],
@@ -206,6 +207,116 @@ Page({
       arrMsg: msg
     })
   },
+
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function () {
+    wx.showNavigationBarLoading();
+    //查询纳税人接口(一般纳税人)
+    var parmaer = new Array
+    var that = this
+    var arrW = []
+    parmaer["ps"] = '10'
+    parmaer["nsrlx"] = '00'
+    parmaer["pn"] = '1'
+    openapi.dorequest(parmaer, 'applet.declare.state.list', (res) => {
+      console.log(res)
+      //添加判断图标显隐状态
+      for (var i = 0; i < res.data.data.length; i++) {
+        res.data.data[i].change = true
+        //处理申报状态
+        switch (res.data.data[i].declareState) {
+          case '00': res.data.data[i].declareState = '已申报'
+            break;
+          case '01': res.data.data[i].declareState = '未申报'
+            break;
+          case null: res.data.data[i].declareState = '未申报'
+            break;
+          case '02': res.data.data[i].declareState = '逾期未申报'
+            break;
+          case '03': res.data.data[i].declareState = '已提交'
+            break;
+        }
+        //处理月报状态
+        switch (res.data.data[i].declareType) {
+          case '00': res.data.data[i].declareType = '月报'
+            break;
+          case '01': res.data.data[i].declareType = '季报'
+            break;
+        }
+        //挑出未申报
+        if (res.data.data[i].declareState == '未申报') {
+          arrW.push(res.data.data[i])
+        }
+      }
+      that.setData({
+        arrMsg: arrW,
+        page: 2
+      })
+    })
+    // 隐藏导航栏加载框  
+    wx.hideNavigationBarLoading();
+    // 停止下拉动作  
+    wx.stopPullDownRefresh();
+  },
+
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function () {
+    //查询纳税人接口(一般纳税人)
+    var parmaer = new Array
+    var that = this
+    var arrW = []
+    parmaer["ps"] = '10'
+    parmaer["nsrlx"] = '00'
+    parmaer["pn"] = that.data.page
+    openapi.dorequest(parmaer, 'applet.declare.state.list', (res) => {
+      //console.log(res)
+      //添加判断图标显隐状态
+      for (var i = 0; i < res.data.data.length; i++) {
+        res.data.data[i].change = true
+        //处理申报状态
+        switch (res.data.data[i].declareState) {
+          case '00': res.data.data[i].declareState = '已申报'
+            break;
+          case '01': res.data.data[i].declareState = '未申报'
+            break;
+          case null: res.data.data[i].declareState = '未申报'
+            break;
+          case '02': res.data.data[i].declareState = '逾期未申报'
+            break;
+          case '03': res.data.data[i].declareState = '已提交'
+            break;
+        }
+        //处理月报状态
+        switch (res.data.data[i].declareType) {
+          case '00': res.data.data[i].declareType = '月报'
+            break;
+          case '01': res.data.data[i].declareType = '季报'
+            break;
+        }
+        //挑出 未申报
+        if (res.data.data[i].declareState == '未申报') {
+          that.data.arrMsg.push(res.data.data[i])
+        }
+      }
+      that.setData({
+        arrMsg: that.data.arrMsg
+      })
+    })
+    that.data.page++
+  },
+
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+
+  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -233,25 +344,4 @@ Page({
   onUnload: function () {
 
   },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })

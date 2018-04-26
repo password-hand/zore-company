@@ -93,7 +93,7 @@
     <view class='flex-between part'>
       <view class='flex-between start'>
         <text>验证码</text>
-        <input placeholder='请输入手机验证码' placeholder-class='placeholder' bindinput='checkedTel'></input>
+        <input type='number' placeholder='请输入手机验证码' placeholder-class='placeholder' bindinput='checkedTel'></input>
       </view>
       <view class='phone-ver ver' bindtap='sondMsg'>发送验证码</view>
     </view>

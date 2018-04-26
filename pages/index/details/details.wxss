@@ -1,6 +1,5 @@
 /* pages/index/details/details.wxss */
 
-
 .declare-tit{
   border-top: 20rpx solid #f5f5f5;
   border-bottom: 2rpx solid #f5f5f5;
