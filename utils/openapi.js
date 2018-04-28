@@ -7,7 +7,7 @@ let basicUrl = 'https://openapi.shujet.com/gateway?'
 let upload = 'https://openapi.shujet.com/upload?'
 //网络请求
 function dorequest(dic, method, callBack) {
-  showTost('请稍后...', 3000)
+  showTost('请稍后...', 3000 ,'loading')
   var that = this
   if (token === "") {
     getToken(function () {
@@ -122,14 +122,18 @@ var desc = function (x, y) {
     return -1;  //返回一个大于0 的数即可  
 }
 
-function showTost(title, time,value) {
+function showTost(title, time, icons) {
   var loadTitle = title
-  if (title === null || title === "" || value === "") {
+  if (title === null || title === "") {
     loadTitle = "请输入内容"
+  }
+  if(icons === '' || icons === null || icons === undefined){
+	  console.log(icons)
+	icons = 'none'
   }
   wx.showToast({
     title: loadTitle,
-    icon: 'none',
+    icon: icons,
     mask: true,
     duration: time,
   })
@@ -139,6 +143,7 @@ function showErrorTost(title) {
   if (title === null || title === "") {
     loadTitle = "请求失败"
   }
+  
   wx.showToast({
     title: loadTitle,
     duration: 1500,

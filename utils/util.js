@@ -9,6 +9,7 @@ const formatTime = date => {
   return [year, month, day].map(formatNumber).join('/')
 }
 
+
 const formatDate = (date) => {
   if (!date) {
     return date;
@@ -42,7 +43,6 @@ const formatNumber = n => {
   n = n.toString()
   return n[1] ? n : '0' + n
 }
-
 
 module.exports = {
   formatTime: formatTime,
