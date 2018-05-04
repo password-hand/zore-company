@@ -1,6 +1,6 @@
 <!--pages/index/ntaxes/ntaxes.wxml-->
 
-<view class='taxes'>
+<view class='taxes' wx:if='{{hasData}}'>
   <!--头部  -->
   <view class='header flex-between'>
     <view bindtap='allChoose' data-changes='{{changes}}'>全选</view>
@@ -35,3 +35,4 @@
   </view>
   
 </view>
+<view wx:else>没有数据</view>

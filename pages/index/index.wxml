@@ -1,6 +1,6 @@
 <!--授权页面  -->
 
-<view class='home-bg' wx:if='{{skip}}'>
+<view class='home-bg' wx:if='{{!skip}}'>
   <view class='skip'>
     <text bindtap='skipPage'>跳过</text>
   </view>

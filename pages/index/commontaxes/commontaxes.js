@@ -5,6 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    hasData:true,
     mun: 0,
     page:2,
     stage: '',
@@ -128,10 +129,17 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (option) {
+  
     //查询纳税人接口(一般纳税人)
     var parmaer = new Array
     var that = this
     var arrW = []
+    //获取本地时间
+    var time = util.formatTime(new Date())
+    var sssq_q = ''
+    var sssq_z = ''
+    //添加判断选中图标显隐属性
+    var msg = that.data.arrMsg
     parmaer["ps"] = '10'
     parmaer["nsrlx"] = '00'
     parmaer["pn"] = '1'
@@ -169,10 +177,17 @@ Page({
         arrMsg: arrW
       })
     })
+    //判断是否请求到数据
+    if (that.data.arrMsg.length === 0) {
+      that.setData({
+        hasData: false
+      })
+    } else {
+      that.setData({
+        hasData: true
+      })
+    }
     //获取本地时间
-    var time = util.formatTime(new Date())
-    var sssq_q = ''
-    var sssq_z = ''
     //判断月份天数
     //闰年
     if (time.split('/')[0] % 4 == 0 && time.split('/')[0] % 100 != 0) {
@@ -203,12 +218,11 @@ Page({
       sssq_z: sssq_z
     })
    
-    //添加判断选中图标显隐属性
-    var msg = this.data.arrMsg
-    for (var i = 0; i < this.data.arrMsg.length; i++) {
+   //添加判断选中图标显隐属性
+    for (var i = 0; i < that.data.arrMsg.length; i++) {
       msg[i].change = true
     }
-    this.setData({
+    that.setData({
       arrMsg: msg
     })
   },
