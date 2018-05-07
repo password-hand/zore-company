@@ -1,5 +1,5 @@
-// pages/index/search/search.js
 var openapi = require('../../../utils/openapi.js');
+var util = require('../../../utils/util.js');
 Page({
 
   /**
@@ -34,7 +34,8 @@ Page({
       console.log(res)
       arr.push(...res.data.data)
       for (let j = 0; j < arr.length; j++) {
-        arr[j].create_time = arr[j].create_time.split(' ')[0]
+        //arr[j].create_time = arr[j].create_time.split(' ')[0]
+        arr[j].create_time = util.formatDate(arr[j].create_time)
         arr[j].changeYJ = ''
         arr[j].changeSF = ''
         if (arr[j].declare_way == '00') {
@@ -56,12 +57,13 @@ Page({
         recordArr: arr,
         time: options.datas
       })
-      if (this.data.recordArr.length == 0) {
-        this.setData({
+      console.log(self.data.recordArr.length)
+      if (self.data.recordArr.length == 0) {
+        self.setData({
           nothing: true
         })
       } else {
-        this.setData({
+        self.setData({
           nothing: false,
           declare_id: res.data.data
         })
@@ -86,7 +88,8 @@ Page({
    //   console.log(res)
       arr.push(...res.data.data)
       for (let j = 0; j < arr.length; j++) {
-        arr[j].create_time = arr[j].create_time.split(' ')[0]
+        // arr[j].create_time = arr[j].create_time.split(' ')[0]
+        arr[j].create_time = util.formatDate(arr[j].create_time)
         arr[j].changeYJ = ''
         arr[j].changeSF = ''
         if (arr[j].declare_way == '00') {
@@ -141,7 +144,8 @@ Page({
       self.data.recordArr.push(...res.data.data)
       console.log(self.data.recordArr)
       for (let j = 0; j < self.data.recordArr.length; j++) {
-        self.data.recordArr[j].create_time = self.data.recordArr[j].create_time.split(' ')[0]
+        // self.data.recordArr[j].create_time = self.data.recordArr[j].create_time.split(' ')[0]
+        self.data.recordArr[j].create_time = util.formatDate(self.data.recordArr[j].create_time)
         self.data.recordArr[j].changeYJ = ''
         self.data.recordArr[j].changeSF = ''
         if (self.data.recordArr[j].declare_way == '00') {

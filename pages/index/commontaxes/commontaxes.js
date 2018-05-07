@@ -176,17 +176,19 @@ Page({
       that.setData({
         arrMsg: arrW
       })
+      //判断是否请求到数据
+      console.log(that.data.arrMsg.length)
+      if (that.data.arrMsg.length === 0) {
+        that.setData({
+          hasData: true
+        })
+      } else {
+        that.setData({
+          hasData: false
+        })
+      }
     })
-    //判断是否请求到数据
-    if (that.data.arrMsg.length === 0) {
-      that.setData({
-        hasData: false
-      })
-    } else {
-      that.setData({
-        hasData: true
-      })
-    }
+   
     //获取本地时间
     //判断月份天数
     //闰年

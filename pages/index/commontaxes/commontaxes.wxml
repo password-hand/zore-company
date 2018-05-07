@@ -1,6 +1,6 @@
 <!--pages/index/ntaxes/ntaxes.wxml-->
 
-<view class='taxes' wx:if='{{hasData}}'>
+<view class='taxes' wx:if='{{!hasData}}'>
   <!--头部  -->
   <view class='header flex-between'>
     <view bindtap='allChoose' data-changes='{{changes}}'>全选</view>
@@ -33,6 +33,20 @@
   <view class='btntaxe'>
     <view class='btn' bindtap='confirmDeclareC'>确认申报</view>
   </view>
-  
+
 </view>
-<view wx:else>没有数据</view>
+
+<view wx:else>
+  <!--没有申报记录显示  -->
+  <view class='recode-box'>
+    <view>
+      <image src='../../../image/no-recode.png'></image>
+    </view>
+    <view style='margin-top:10rpx;'>
+      <text class='text1'>还没有记录</text>
+    </view>
+    <view>
+      <text class='text2'>您还没有申报，快去申报吧</text>
+    </view>
+  </view>
+</view>

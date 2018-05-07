@@ -61,7 +61,6 @@ Page({
               quP.push(res.data.data.order[i])
             }
           }
-          
           that.setData({
             complete:wanP,
             cancel: quP,
@@ -103,7 +102,6 @@ Page({
               showOder3: true,
             })
           }
-         
           if (that.data.waitpay.length != 0) {
             that.setData({
               showOder2: false,
@@ -115,7 +113,6 @@ Page({
           }
         }
       }
-
     })
     if (num === that.data.mun0) {
       that.setData({
@@ -204,7 +201,6 @@ Page({
                 })
               }
             }
-
           })
         }
         else if (res.cancel) {
@@ -267,7 +263,6 @@ Page({
                 })
               }
             }
-
           })
         }
         else if (res.cancel) {
@@ -275,7 +270,6 @@ Page({
       }
     })
   },
-
 
   /**
    * 生命周期函数--监听页面加载

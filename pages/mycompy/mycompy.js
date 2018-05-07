@@ -1,4 +1,3 @@
-// pages/me/me.js
 var openapi = require('../../utils/openapi.js');
 
 Page({
@@ -85,9 +84,6 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    // wx.showLoading({
-    //   title: '玩命加载中',
-    // }) 
     var parmaer = new Array
     var newArray = []
     parmaer["uid"] = '456789'
@@ -101,7 +97,6 @@ Page({
       })
     })
     this.data.page++
-    // wx.hideLoading(); 
   },
 
   /**

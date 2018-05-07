@@ -5,6 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    hasData:true,
     mun: 0,
     stage: '',
     page:2,
@@ -163,7 +164,19 @@ Page({
       that.setData({
         arrMsg: arrW
       })
+      //判断是否请求到数据
+      console.log(that.data.arrMsg.length)
+      if (that.data.arrMsg.length === 0) {
+        that.setData({
+          hasData: true
+        })
+      } else {
+        that.setData({
+          hasData: false
+        })
+      }
     })
+   
     //获取本地时间
     var time = util.formatTime(new Date())
     var sssq_q = ''

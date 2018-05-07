@@ -1,7 +1,6 @@
 const app = getApp()
 var util = require('../../utils/util.js');
 var openapi = require('../../utils/openapi.js');
-
 Page({
   data: {
     skip: false,
@@ -31,7 +30,7 @@ Page({
     //选中状态
     checkedHome: true,
     checkedMe: false,
-   // date: '',
+    // date: '',
     //弹框状态
     showPop: true,
     year: '',
@@ -45,7 +44,7 @@ Page({
     page: 2
   },
   onLoad: function () {
-
+    //设置本地时间为默认时间
     var time = util.formatTime(new Date())
     var arrTime = time.split('/')
     var year = arrTime[0]
@@ -64,6 +63,9 @@ Page({
       index1: mouth - 1,
       index2: day - 1,
     })
+    /************************************************************ */
+    /**授权成功后 此方法不要 */
+    /************************************************************ */
     wx.getUserInfo({
       success: (res) => {
         that.setData({
@@ -120,15 +122,11 @@ Page({
     param['ps'] = '10'
     param['month'] = '01'
     openapi.dorequest(param, 'applet.declare.record.list', (res) => {
-      console.log(res)
+      // console.log(res)
       arr.push(...res.data.data)
       for (let j = 0; j < arr.length; j++) {
-        arr[j].create_time = arr[j].create_time.split(' ')[0]
         //时间格式化
-        // ********************************************************/
-        //arr[j].create_time = util.formatDate(arr[j].create_time)
-        // ********************************************************/
-
+        arr[j].create_time = util.formatDate(arr[j].create_time)
         arr[j].changeYJ = ''
         arr[j].changeSF = ''
         if (arr[j].declare_way == '00') {
@@ -180,19 +178,113 @@ Page({
         })
       }
     })
-    // wx.getSetting({
-    //   success(res) {
-    //     if (!res.authSetting['scope.record']) {
-    //       wx.authorize({
-    //         scope: 'scope.record',
-    //         success() {
-    //           // 用户已经同意小程序使用录音功能，后续调用 wx.startRecord 接口不会弹窗询问
-    //           wx.startRecord()
-    //         }
-    //       })
-    //     }
-    //   }
-    // })
+    /************************************************ */
+    //授权登陆
+    /************************************************ */
+    var openId = wx.getStorageSync('openId')
+
+    //缓存里面有信息的时候
+    if (openId) {
+      wx.getUserInfo({
+        success: function (res) {
+          that.setData({
+            niceName: res.userInfo.nickName,
+            img: res.userInfo.avatarUrl,
+          })
+        },
+        fail: function () {
+          openapi.showTost("获取失败!", 1500)
+        },
+        complete: function () {
+          console.log("获取用户信息完成！")
+        }
+      })
+    }
+    else {
+      //授权弹出框
+      wx.authorize({
+        scope: 'scope.userInfo',
+        success: () => {
+          wx.login({
+            success: function (res) {
+              //console.log(res.code)
+              if (res.code) {
+                wx.getUserInfo({
+                  withCredentials: true,
+                  success: function (res_user) {
+                    // console.log(res_user)
+                    //可能调公司接口
+                    var parass = new Array
+                    parass['jscode'] = res.code
+                    parass['encrypted'] = res_user.encryptedData
+                    parass['initVector'] = res_user.iv
+                    openapi.dorequest(parass, 'applet.get.userinfo', (res) => {
+                      console.log(res)
+                      //设置头像及昵称
+                      that.setData({
+                        niceName: res.data.nickName,
+                        img: res.data.avatarUrl,
+                      })
+                    })
+                  },
+                  fail: function () {
+                    wx.showModal({
+                      title: '警告通知',
+                      content: '您点击了拒绝授权,将无法正常显示个人信息,点击确定重新获取授权。',
+                      success: function (res) {
+                        console.log(res)
+                        if (res.confirm) {
+                          wx.openSetting({
+                            success: (res) => {
+                              if (res.authSetting["scope.userInfo"]) {////如果用户重新同意了授权登录
+                                wx.authorize({
+                                  scope: 'scope.userInfo',
+                                  success: () => {
+                                    wx.login({
+                                      success: function (res_login) {
+                                        if (res_login.code) {
+                                          wx.getUserInfo({
+                                            withCredentials: true,
+                                            success: function (res_user) {
+                                              //可能调公司接口
+                                              var parass = new Array
+                                              parass['jscode'] = res.code
+                                              parass['encrypted'] = res_user.encryptedData
+                                              parass['initVector'] = res_user.iv
+                                              openapi.dorequest(parass, 'applet.get.userinfo', (res) => {
+                                                console.log(res)
+                                                //设置头像及昵称
+                                                that.setData({
+                                                  niceName: res.data.nickName,
+                                                  img: res.data.avatarUrl,
+                                                })
+                                              })
+                                            }
+                                          })
+                                        }
+                                      }
+                                    })
+                                  }
+                                })
+                              }
+                            },
+                            fail: function (res) {
+                              openapi.showTost("获取失败!", 1500)
+                            }
+                          })
+                        }
+                      }
+                    })
+                  }, complete: function (res) {
+
+                  }
+                })
+              }
+            }
+          })
+        }
+      })
+    }
   },
 
   //正则手机验证
@@ -395,7 +487,7 @@ Page({
       url: 'search/search?' + "&datas=" + this.data.dataTime
     })
   },
-  declareRecord: function (e) {
+  declareRecord: function () {
     var self = this;
     wx.navigateTo({
       url: '../declare/declare'
@@ -437,7 +529,6 @@ Page({
     var self = this;
     //查询按照时间查询申报记录
     var param = new Array
-    //var arr = []
     param['uid'] = '456789'
     param['pn'] = self.data.page
     param['ps'] = '10'
@@ -446,12 +537,13 @@ Page({
       self.data.recordArr.push(...res.data.data)
       console.log(self.data.recordArr)
       for (let j = 0; j < self.data.recordArr.length; j++) {
-        self.data.recordArr[j].create_time = self.data.recordArr[j].create_time.split(' ')[0]
+        self.data.recordArr[j].create_time = util.formatDate(self.data.recordArr[j].create_time)
         self.data.recordArr[j].changeYJ = ''
         self.data.recordArr[j].changeSF = ''
         if (self.data.recordArr[j].declare_way == '00') {
-          self.data.recordArr[j].declare_way = '月报'
+          //self.data.recordArr[j].declare_way = '月报'
           self.data.recordArr[j].changeYJ = true
+          console.log(self.data.recordArr[j].changeYJ)
         }
         if (self.data.recordArr[j].declare_way == '01') {
           self.data.recordArr[j].declare_way = '季报'
@@ -464,6 +556,7 @@ Page({
           self.data.recordArr[j].changeSF = false
         }
       }
+      console.log(self.data.recordArr)
       self.setData({
         recordArr: self.data.recordArr,
         declare_id: self.data.recordArr
@@ -486,10 +579,11 @@ Page({
     param['ps'] = '10'
     param['month'] = '01'
     openapi.dorequest(param, 'applet.declare.record.list', (res) => {
-      //   console.log(res)
+      // console.log(res)
       arr.push(...res.data.data)
       for (let j = 0; j < arr.length; j++) {
-        arr[j].create_time = arr[j].create_time.split(' ')[0]
+        // arr[j].create_time = arr[j].create_time.split(' ')[0]
+        arr[j].create_time = util.formatDate(arr[j].create_time)
         arr[j].changeYJ = ''
         arr[j].changeSF = ''
         if (arr[j].declare_way == '00') {

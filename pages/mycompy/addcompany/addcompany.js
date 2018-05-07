@@ -1,4 +1,3 @@
-// pages/me/me.js
 var openapi = require('../../../utils/openapi.js');
 
 Page({
@@ -11,8 +10,6 @@ Page({
     arrcontact: ['请选择联系人'],
     index1: 0,
     index2: 0,
-    //addContent: false,
-    //noCompany: true,
     userEnterpriseId: '',
     //添加企业信息
     addCompany: [],
@@ -98,7 +95,7 @@ Page({
     })
   },
   //发送验证码
-  sondMsg: function () {
+  sendMsg: function () {
     var parmaer = new Array
     parmaer["mobile"] = '12515485548'//最初获取的手机号
     openapi.dorequest(parmaer, 'applet.captcha.sendsms', (res) => {
@@ -119,7 +116,7 @@ Page({
     var checknum = self.data.checknum.toLowerCase()
     var parmaer = new Array
     var add = e.currentTarget.dataset
-    if (checkedImg === "" || checkedTel === "" || self.data.ediID=='02') {//|| checkedImg != letter || checkedTel ！= checknum
+    if (checkedImg === "" || checkedTel === "" || self.data.ediID=='02') {//|| checkedImg != letter || checkedTel ！= checknum(后台返回的验证码)
       openapi.showTost('请输入正确信息', 2000)
     } else {
       parmaer["type"] = self.data.ediID

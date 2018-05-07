@@ -1,4 +1,3 @@
-// pages/index/commontaxes/sucfail/sucfail.js
 Page({
 
   /**

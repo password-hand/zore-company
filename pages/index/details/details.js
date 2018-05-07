@@ -1,4 +1,3 @@
-// pages/index/details/details.js
 var openapi = require('../../../utils/openapi.js');
 Page({
 

@@ -1,5 +1,5 @@
-// pages/declare/declare.js
 var openapi = require('../../utils/openapi.js');
+var util = require('../../utils/util.js');
 Page({
 
   /**
@@ -31,7 +31,8 @@ Page({
     openapi.dorequest(param, 'applet.declare.record.list', (res) => {
       arr.push(...res.data.data)
       for (let j = 0; j < arr.length; j++) {
-        arr[j].create_time = arr[j].create_time.split(' ')[0]
+        // arr[j].create_time = arr[j].create_time.split(' ')[0]
+        arr[j].create_time = util.formatDate(arr[j].create_time)
         arr[j].changeYJ = ''
         arr[j].changeSF = ''
         if (arr[j].declare_way == '00') {
@@ -85,10 +86,11 @@ Page({
     param['pn'] = '1'
     param['ps'] = '10'
     openapi.dorequest(param, 'applet.declare.record.list', (res) => {
-      //   console.log(res)
+        //console.log(res)
       arr.push(...res.data.data)
       for (let j = 0; j < arr.length; j++) {
-        arr[j].create_time = arr[j].create_time.split(' ')[0]
+       // arr[j].create_time = arr[j].create_time.split(' ')[0]
+        arr[j].create_time = util.formatDate(arr[j].create_time)
         arr[j].changeYJ = ''
         arr[j].changeSF = ''
         if (arr[j].declare_way == '00') {
@@ -132,37 +134,39 @@ Page({
    */
   onReachBottom: function () {
     var param = new Array
-    //var arr = []
+    var that = this
     param['uid'] = '456789'
-    param['pn'] = this.data.page
+    param['pn'] = that.data.page
     param['ps'] = '10'
     openapi.dorequest(param, 'applet.declare.record.list', (res) => {
-      this.data.recordArr.push(...res.data.data)
-      for (let j = 0; j < this.data.recordArr.length; j++) {
-        this.data.recordArr[j].create_time = this.data.recordArr[j].create_time.split(' ')[0]
-        this.data.recordArr[j].changeYJ = ''
-        this.data.recordArr[j].changeSF = ''
-        if (this.data.recordArr[j].declare_way == '00') {
-          this.data.recordArr[j].declare_way = '月报'
-          this.data.recordArr[j].changeYJ = true
+      that.data.recordArr.push(...res.data.data)
+      console.log(res.data.data)
+      for (let j = 0; j < that.data.recordArr.length; j++) {
+        //this.data.recordArr[j].create_time = this.data.recordArr[j].create_time.split(' ')[0]
+        that.data.recordArr[j].create_time = util.formatDate(that.data.recordArr[j].create_time)
+        that.data.recordArr[j].changeYJ = ''
+        that.data.recordArr[j].changeSF = ''
+        if (that.data.recordArr[j].declare_way == '00') {
+          that.data.recordArr[j].declare_way = '月报'
+          that.data.recordArr[j].changeYJ = true
 
         }
-        if (this.data.recordArr[j].declare_way == '01') {
-          this.data.recordArr[j].declare_way = '季报'
-          this.data.recordArr[j].changeYJ = false
+        if (that.data.recordArr[j].declare_way == '01') {
+          that.data.recordArr[j].declare_way = '季报'
+          that.data.recordArr[j].changeYJ = false
 
         }
-        if (this.data.recordArr[j].declare_result == '成功') {
-          this.data.recordArr[j].changeSF = true
+        if (that.data.recordArr[j].declare_result == '成功') {
+          that.data.recordArr[j].changeSF = true
 
         }
-        if (this.data.recordArr[j].declare_result == '失败') {
-          this.data.recordArr[j].changeSF = false
+        if (that.data.recordArr[j].declare_result == '失败') {
+          that.data.recordArr[j].changeSF = false
         }
       }
-      this.setData({
-        recordArr: this.data.recordArr,
-        declare_id: this.data.recordArr
+      that.setData({
+        recordArr: that.data.recordArr,
+        declare_id: that.data.recordArr
       }) 
     })
   },

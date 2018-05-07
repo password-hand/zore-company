@@ -1,4 +1,3 @@
-// pages/declare/declarelist/declarelist.js
 var openapi = require('../../../utils/openapi.js');
 Page({
 

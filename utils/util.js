@@ -9,7 +9,7 @@ const formatTime = date => {
   return [year, month, day].map(formatNumber).join('/')
 }
 
-
+//时间格式初始化
 const formatDate = (date) => {
   if (!date) {
     return date;
