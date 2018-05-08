@@ -9,7 +9,8 @@ Page({
     nothing: '',
     page:2,
     time:'',
-    recordArr: []
+    recordArr: [],
+    arrs:[]
   },
   declareList: function (e) {
     let ind = e.currentTarget.dataset.index
@@ -79,7 +80,7 @@ Page({
     var self = this;
     //查询当月申报记录
     var param = new Array
-    var arr = []
+     var arr = []
     param['uid'] = '456789'
     param['pn'] = '1'
     param['ps'] = '10'
@@ -135,37 +136,39 @@ Page({
     var self = this;
     //查询按照时间查询申报记录
     var param = new Array
-    //var arr = []
+    var arrss = []
     param['uid'] = '456789'
     param['pn'] = self.data.page
     param['ps'] = '10'
     param['date'] = self.data.time
     openapi.dorequest(param, 'applet.declare.record.list', (res) => {
-      self.data.recordArr.push(...res.data.data)
-      console.log(self.data.recordArr)
-      for (let j = 0; j < self.data.recordArr.length; j++) {
+      self.data.arrs.push(...res.data.data)
+      console.log(self.data.arrs)
+      for (let j = 0; j < self.data.arrs.length; j++) {
         // self.data.recordArr[j].create_time = self.data.recordArr[j].create_time.split(' ')[0]
-        self.data.recordArr[j].create_time = util.formatDate(self.data.recordArr[j].create_time)
-        self.data.recordArr[j].changeYJ = ''
-        self.data.recordArr[j].changeSF = ''
-        if (self.data.recordArr[j].declare_way == '00') {
-          self.data.recordArr[j].declare_way = '月报'
-          self.data.recordArr[j].changeYJ = true
+        self.data.arrs[j].create_time = util.formatDate(self.data.arrs[j].create_time)
+        self.data.arrs[j].changeYJ = ''
+        self.data.arrs[j].changeSF = ''
+        if (self.data.arrs[j].declare_way == '00') {
+          self.data.arrs[j].declare_way = '月报'
+          self.data.arrs[j].changeYJ = true
         }
-        if (self.data.recordArr[j].declare_way == '01') {
-          self.data.recordArr[j].declare_way = '季报'
-          self.data.recordArr[j].changeYJ = false
+        if (self.data.arrs[j].declare_way == '01') {
+          self.data.arrs[j].declare_way = '季报'
+          self.data.arrs[j].changeYJ = false
         }
-        if (self.data.recordArr[j].declare_result == '成功') {
-          self.data.recordArr[j].changeSF = true
+        if (self.data.arrs[j].declare_result == '成功') {
+          self.data.arrs[j].changeSF = true
         }
-        if (self.data.recordArr[j].declare_result == '失败') {
-          self.data.recordArr[j].changeSF = false
+        if (self.data.arrs[j].declare_result == '失败') {
+          self.data.arrs[j].changeSF = false
         }
       }
+      arrss.push(...self.data.recordArr)
+      arrss.push(...self.data.arrs)
       self.setData({
-        recordArr: self.data.recordArr,
-        declare_id: self.data.recordArr
+        recordArr: arrss,
+        declare_id: arrss
       })
     })
     self.data.page++

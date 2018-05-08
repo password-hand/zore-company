@@ -61,8 +61,9 @@
         </view>
         <image class='next' src='../../image/next.png'></image>
       </view>
+      
     </view>
-
+<view id='seat'></view>
 
     <!--没有申报记录显示  -->
     <view wx:if='{{recode}}' class='recode-box'>
@@ -79,8 +80,8 @@
 
 
     <!--有申报记录显示  -->
-    <view wx:else style='margin-top:525rpx;'>
-      <!--   <scroll-view  scroll-y style="height: {{srollHeight}}rpx; min-height:192px"> -->
+    <view wx:else>
+         <!-- <scroll-view  scroll-y style="height: {{srollHeight}}rpx; min-height:192px">  -->
       <view class='scroll' wx:for='{{recordArr}}' data-index='{{index}}' bindtap='detailsRecord'>
         <view class='apply-list flex-between'>
           <view>
@@ -93,7 +94,7 @@
           <view class='apply-list-right'>{{item.create_time}}</view>
         </view>
       </view>
-      <!-- </scroll-view> -->
+       <!-- </scroll-view>  -->
     </view>
 
   </view>
@@ -149,7 +150,7 @@
         <image src='{{img}}'></image>
       </view>
       <view class='nice-name'>{{niceName}}</view>
-      <view class='flex-around' style='margin-top:90rpx;margin-bottom:190rpx;'>
+      <view class='flex-around' style='margin-top:90rpx;margin-bottom:220rpx;'>
         <view class='show-msg flex-around'>
           <view>EB</view>
           <view class='show-msg-con'>{{eb}}</view>

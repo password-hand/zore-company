@@ -8,7 +8,8 @@ Page({
   data: {
     nothing:true,
     page:2,
-    recordArr:[]
+    recordArr:[],
+    arrs:[]
   },
   declareList:function(e){
      
@@ -86,7 +87,7 @@ Page({
     param['pn'] = '1'
     param['ps'] = '10'
     openapi.dorequest(param, 'applet.declare.record.list', (res) => {
-        //console.log(res)
+      console.log(res.data.data)
       arr.push(...res.data.data)
       for (let j = 0; j < arr.length; j++) {
        // arr[j].create_time = arr[j].create_time.split(' ')[0]
@@ -135,38 +136,42 @@ Page({
   onReachBottom: function () {
     var param = new Array
     var that = this
+    var arrss = []
     param['uid'] = '456789'
     param['pn'] = that.data.page
     param['ps'] = '10'
     openapi.dorequest(param, 'applet.declare.record.list', (res) => {
-      that.data.recordArr.push(...res.data.data)
-      console.log(res.data.data)
-      for (let j = 0; j < that.data.recordArr.length; j++) {
+      // that.data.recordArr.push(...res.data.data)
+      that.data.arrs.push(...res.data.data)
+      console.log(that.data.arrs)
+      for (let j = 0; j < that.data.arrs.length; j++) {
         //this.data.recordArr[j].create_time = this.data.recordArr[j].create_time.split(' ')[0]
-        that.data.recordArr[j].create_time = util.formatDate(that.data.recordArr[j].create_time)
-        that.data.recordArr[j].changeYJ = ''
-        that.data.recordArr[j].changeSF = ''
-        if (that.data.recordArr[j].declare_way == '00') {
-          that.data.recordArr[j].declare_way = '月报'
-          that.data.recordArr[j].changeYJ = true
+        that.data.arrs[j].create_time = util.formatDate(that.data.arrs[j].create_time)
+        that.data.arrs[j].changeYJ = ''
+        that.data.arrs[j].changeSF = ''
+        if (that.data.arrs[j].declare_way == '00') {
+          that.data.arrs[j].declare_way = '月报'
+          that.data.arrs[j].changeYJ = true
 
         }
-        if (that.data.recordArr[j].declare_way == '01') {
-          that.data.recordArr[j].declare_way = '季报'
-          that.data.recordArr[j].changeYJ = false
+        if (that.data.arrs[j].declare_way == '01') {
+          that.data.arrs[j].declare_way = '季报'
+          that.data.arrs[j].changeYJ = false
 
         }
-        if (that.data.recordArr[j].declare_result == '成功') {
-          that.data.recordArr[j].changeSF = true
+        if (that.data.arrs[j].declare_result == '成功') {
+          that.data.arrs[j].changeSF = true
 
         }
-        if (that.data.recordArr[j].declare_result == '失败') {
-          that.data.recordArr[j].changeSF = false
+        if (that.data.arrs[j].declare_result == '失败') {
+          that.data.arrs[j].changeSF = false
         }
       }
+      arrss.push(...that.data.recordArr)
+      arrss.push(...that.data.arrs)
       that.setData({
-        recordArr: that.data.recordArr,
-        declare_id: that.data.recordArr
+        recordArr: arrss,
+        declare_id: arrss
       }) 
     })
   },

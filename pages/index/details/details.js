@@ -17,7 +17,7 @@ Page({
     var arr = []
     param['id'] = options.num
     openapi.dorequest(param, 'declare.record.detail', (res) => {
-      //console.log(res)
+      // console.log(res)
       if (res.data.data.declare_way == '00') {
         res.data.data.declare_way = '月报'
       }
@@ -25,16 +25,16 @@ Page({
         res.data.data.declare_way = '季报'
       }
       if (res.data.data.declare_state == '00') {
-        res.data.data.declare_way = '已申报'
+        res.data.data.declare_state = '已申报'
       }
       if (res.data.data.declare_state == '01') {
-        res.data.data.declare_way = '未申报'
+        res.data.data.declare_state = '未申报'
       }
        if (res.data.data.declare_state == '02') {
-        res.data.data.declare_way = '逾期未申报'
+         res.data.data.declare_state = '逾期未申报'
       }
       if (res.data.data.declare_state == '03') {
-        res.data.data.declare_way = '已提交'
+        res.data.data.declare_state = '已提交'
       }
       if (res.data.data.failure_reason == null) {
         res.data.data.failure_reason = '无'

@@ -40,7 +40,7 @@ Page({
     changeYJ: '',
     changeSF: '',
     declare_id: '',
-    //srollHeight: '',
+    // srollHeight: '',
     page: 2
   },
   onLoad: function () {
@@ -54,7 +54,7 @@ Page({
     var arrayMouths = this.data.arrayMouth
     var arrayDays = this.data.arrayDay
     var that = this
-    var ping
+    // var ping
     that.setData({
       //设置本地时间为默认时间
       year: arrTime[0],
@@ -62,18 +62,19 @@ Page({
       day: arrTime[2],
       index1: mouth - 1,
       index2: day - 1,
+      // srollHeight:350
     })
     /************************************************************ */
     /**授权成功后 此方法不要 */
     /************************************************************ */
-    wx.getUserInfo({
-      success: (res) => {
-        that.setData({
-          img: res.userInfo.avatarUrl,
-          niceName: res.userInfo.nickName
-        })
-      }
-    })
+    // wx.getUserInfo({
+    //   success: (res) => {
+    //     that.setData({
+    //       img: res.userInfo.avatarUrl,
+    //       niceName: res.userInfo.nickName
+    //     })
+    //   }
+    // })
     for (var i = year * 1 - 100; i < year * 1 + 100; i++) {
       arrayYears.push(i)
     }
@@ -178,15 +179,17 @@ Page({
         })
       }
     })
+
     /************************************************ */
     //授权登陆
     /************************************************ */
     var openId = wx.getStorageSync('openId')
-
-    //缓存里面有信息的时候
+    console.log(openId)
+    //缓存里面有信息表示已经授权
     if (openId) {
       wx.getUserInfo({
         success: function (res) {
+          console.log(res)
           that.setData({
             niceName: res.userInfo.nickName,
             img: res.userInfo.avatarUrl,
@@ -202,86 +205,95 @@ Page({
     }
     else {
       //授权弹出框
-      wx.authorize({
-        scope: 'scope.userInfo',
-        success: () => {
-          wx.login({
-            success: function (res) {
-              //console.log(res.code)
-              if (res.code) {
-                wx.getUserInfo({
-                  withCredentials: true,
-                  success: function (res_user) {
-                    // console.log(res_user)
-                    //可能调公司接口
-                    var parass = new Array
-                    parass['jscode'] = res.code
-                    parass['encrypted'] = res_user.encryptedData
-                    parass['initVector'] = res_user.iv
-                    openapi.dorequest(parass, 'applet.get.userinfo', (res) => {
-                      console.log(res)
-                      //设置头像及昵称
-                      that.setData({
-                        niceName: res.data.nickName,
-                        img: res.data.avatarUrl,
-                      })
-                    })
-                  },
-                  fail: function () {
-                    wx.showModal({
-                      title: '警告通知',
-                      content: '您点击了拒绝授权,将无法正常显示个人信息,点击确定重新获取授权。',
-                      success: function (res) {
+      wx.getSetting({
+        success: (response) => {
+          // console.log(response.authSetting['scope.userInfo'])
+          if (!response.authSetting['scope.userInfo']) {
+            // console.log('没有授权')
+            wx.login({
+              success: function (res) {
+                // console.log(res)
+                if (res.code) {
+                  wx.getUserInfo({
+                    withCredentials: true,
+                    success: function (res_user) {
+                      // console.log(res_user)
+                      // console.log(res_user.encryptedData)
+                      // console.log(res.code)
+                      // console.log(res_user.iv)
+                      var parass = new Array
+                      parass['jscode'] = res.code
+                      parass['encrypted'] = res_user.encryptedData
+                      parass['initVector'] = res_user.iv
+                      openapi.dorequest(parass, 'applet.get.userinfo', (res) => {
                         console.log(res)
-                        if (res.confirm) {
-                          wx.openSetting({
-                            success: (res) => {
-                              if (res.authSetting["scope.userInfo"]) {////如果用户重新同意了授权登录
-                                wx.authorize({
-                                  scope: 'scope.userInfo',
-                                  success: () => {
-                                    wx.login({
-                                      success: function (res_login) {
-                                        if (res_login.code) {
-                                          wx.getUserInfo({
-                                            withCredentials: true,
-                                            success: function (res_user) {
-                                              //可能调公司接口
-                                              var parass = new Array
-                                              parass['jscode'] = res.code
-                                              parass['encrypted'] = res_user.encryptedData
-                                              parass['initVector'] = res_user.iv
-                                              openapi.dorequest(parass, 'applet.get.userinfo', (res) => {
-                                                console.log(res)
-                                                //设置头像及昵称
-                                                that.setData({
-                                                  niceName: res.data.nickName,
-                                                  img: res.data.avatarUrl,
+                        //设置头像及昵称
+                        that.setData({
+                          niceName: res.data.nickName,
+                          img: res.data.avatarUrl,
+                        })
+                        //储存
+                        wx.setStorageSync('openId', res.data.openId);
+                      })
+                    },
+                    fail: function () {
+                      console.log('拒绝授权')
+                      wx.showModal({
+                        title: '警告',
+                        content: '若不进行授权,将无法正常显示个人信息及无法体验零申报功能,点击确定重新获取授权。',
+                        success: function (res) {
+                          if (res.confirm) {
+                            wx.openSetting({
+                              success: (res) => {
+                                if (res.authSetting["scope.userInfo"]) {
+                                  wx.authorize({
+                                    scope: 'scope.userInfo',
+                                    success: () => {
+                                      wx.login({
+                                        success: function (res_login) {
+                                          if (res_login.code) {
+                                            wx.getUserInfo({
+                                              withCredentials: true,
+                                              success: function (res_login) {
+                                                console.log(res_login.encryptedData)
+                                                console.log(res_login.code)
+                                                console.log(res_login.iv)
+                                                var parass = new Array
+                                                parass['jscode'] = res_login.code
+                                                parass['encrypted'] = res_login.encryptedData
+                                                parass['initVector'] = res_login.iv
+                                                openapi.dorequest(parass, 'applet.get.userinfo', (res) => {
+                                                  console.log(res)
+                                                  //设置头像及昵称
+                                                  that.setData({
+                                                    niceName: res.data.nickName,
+                                                    img: res.data.avatarUrl,
+                                                  })
+                                                  //储存
+                                                  wx.setStorageSync('openId', res.data.openId);
                                                 })
-                                              })
-                                            }
-                                          })
+                                              }
+                                            })
+                                          }
                                         }
-                                      }
-                                    })
-                                  }
-                                })
+                                      })
+                                    }
+                                  })
+                                }
+                              },
+                              fail: function (res) {
+                                openapi.showTost("获取失败!", 1500)
                               }
-                            },
-                            fail: function (res) {
-                              openapi.showTost("获取失败!", 1500)
-                            }
-                          })
+                            })
+                          }
                         }
-                      }
-                    })
-                  }, complete: function (res) {
-
-                  }
-                })
+                      })
+                    },
+                  })
+                }
               }
-            }
-          })
+            })
+          }
         }
       })
     }
@@ -523,9 +535,10 @@ Page({
   },
 
   /**
-   * 页面上拉触底事件的处理函数
+   * 页面上拉触底事件的处理函数加载更多
    */
   onReachBottom: function () {
+    console.log("sfdsf")
     var self = this;
     //查询按照时间查询申报记录
     var param = new Array
@@ -535,28 +548,10 @@ Page({
     param['month'] = '01'
     openapi.dorequest(param, 'applet.declare.record.list', (res) => {
       self.data.recordArr.push(...res.data.data)
-      console.log(self.data.recordArr)
+      // console.log(self.data.recordArr)
       for (let j = 0; j < self.data.recordArr.length; j++) {
         self.data.recordArr[j].create_time = util.formatDate(self.data.recordArr[j].create_time)
-        self.data.recordArr[j].changeYJ = ''
-        self.data.recordArr[j].changeSF = ''
-        if (self.data.recordArr[j].declare_way == '00') {
-          //self.data.recordArr[j].declare_way = '月报'
-          self.data.recordArr[j].changeYJ = true
-          console.log(self.data.recordArr[j].changeYJ)
-        }
-        if (self.data.recordArr[j].declare_way == '01') {
-          self.data.recordArr[j].declare_way = '季报'
-          self.data.recordArr[j].changeYJ = false
-        }
-        if (self.data.recordArr[j].declare_result == '成功') {
-          self.data.recordArr[j].changeSF = true
-        }
-        if (self.data.recordArr[j].declare_result == '失败') {
-          self.data.recordArr[j].changeSF = false
-        }
       }
-      console.log(self.data.recordArr)
       self.setData({
         recordArr: self.data.recordArr,
         declare_id: self.data.recordArr

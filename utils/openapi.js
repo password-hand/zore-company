@@ -34,9 +34,11 @@ function dorequest(dic, method, callBack) {
       //如果返回数据不是100 提示错误
       else if (res.data.code !== "100") {
          showErrorTost(res.data.mesg)
+          // console.log(res)
       } else {
         wx.hideToast()
         callBack(res)
+        // console.log(res)
       }
     },
     fail: function (res) {
