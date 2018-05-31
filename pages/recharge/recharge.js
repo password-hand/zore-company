@@ -6,8 +6,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    arrEb: [],
-    arrMsg: [],
+    arrEb: ['01', '02', '03', '02', '03'],//测试数据
+    arrMsg: ['01', '02', '03', '02', '03'],//测试数据
     chooseIndexE: 0,
     chooseConM: '',
     chooseIndexMsg: 0,

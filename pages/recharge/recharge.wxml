@@ -28,10 +28,9 @@
       <view class='choose-tit flex-around'>
         <text>请选择EB个数</text>
       </view>
-      <view class='flex-around counts-box'>
-        <text bindtap='chooseCountE' data-index="{{index}}" wx:for='{{arrEb}}' class="{{index===chooseIndexE?'active':''}}">{{item.goodsAlias}}</text>
-
-      </view>
+        <view class='counts-box'>
+          <text bindtap='chooseCountE' data-index="{{index}}" wx:for='{{arrEb}}' class="{{index===chooseIndexE?'active':''}}">{{item}}</text>
+        </view>
     </view>
     <view class='sum-money'>
       <image src='../../image/money.png'></image>
@@ -78,7 +77,7 @@
       <view class='choose-tit flex-around'>
         <text>请选择短信套餐</text>
       </view>
-      <view class='flex-around counts-box'>
+      <view class='counts-box'>
         <text bindtap='chooseCountMsg' data-index='{{index}}' wx:for='{{arrMsg}}' class="{{index===chooseIndexMsg?'active':''}}">{{item.goodsAlias}}</text>
       </view>
     </view>

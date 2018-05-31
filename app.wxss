@@ -43,7 +43,6 @@ view{
   bottom: 40rpx;
   left: 5%;
 }
-
  .yue {
   background: #f1b054;
 }

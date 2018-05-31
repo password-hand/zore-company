@@ -207,12 +207,12 @@ Page({
       //授权弹出框
       wx.getSetting({
         success: (response) => {
-          // console.log(response.authSetting['scope.userInfo'])
+          console.log(response)
           if (!response.authSetting['scope.userInfo']) {
             // console.log('没有授权')
             wx.login({
               success: function (res) {
-                // console.log(res)
+                console.log(res)
                 if (res.code) {
                   wx.getUserInfo({
                     withCredentials: true,
@@ -225,7 +225,7 @@ Page({
                       parass['jscode'] = res.code
                       parass['encrypted'] = res_user.encryptedData
                       parass['initVector'] = res_user.iv
-                      openapi.dorequest(parass, 'applet.get.userinfo', (res) => {
+                      openapi.dorequest(parass,'applet.get.userinfo', (res) => {
                         console.log(res)
                         //设置头像及昵称
                         that.setData({
@@ -255,9 +255,9 @@ Page({
                                             wx.getUserInfo({
                                               withCredentials: true,
                                               success: function (res_login) {
-                                                console.log(res_login.encryptedData)
-                                                console.log(res_login.code)
-                                                console.log(res_login.iv)
+                                                // console.log(res_login.encryptedData)
+                                                // console.log(res_login.code)
+                                                // console.log(res_login.iv)
                                                 var parass = new Array
                                                 parass['jscode'] = res_login.code
                                                 parass['encrypted'] = res_login.encryptedData
@@ -538,7 +538,6 @@ Page({
    * 页面上拉触底事件的处理函数加载更多
    */
   onReachBottom: function () {
-    console.log("sfdsf")
     var self = this;
     //查询按照时间查询申报记录
     var param = new Array
