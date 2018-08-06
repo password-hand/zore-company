@@ -67,14 +67,14 @@ Page({
     /************************************************************ */
     /**授权成功后 此方法不要 */
     /************************************************************ */
-    // wx.getUserInfo({
-    //   success: (res) => {
-    //     that.setData({
-    //       img: res.userInfo.avatarUrl,
-    //       niceName: res.userInfo.nickName
-    //     })
-    //   }
-    // })
+    wx.getUserInfo({
+      success: (res) => {
+        that.setData({
+          img: res.userInfo.avatarUrl,
+          niceName: res.userInfo.nickName
+        })
+      }
+    })
     for (var i = year * 1 - 100; i < year * 1 + 100; i++) {
       arrayYears.push(i)
     }
